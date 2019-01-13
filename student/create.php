@@ -22,14 +22,16 @@ $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if (
+    !empty($data->id) &&
     !empty($data->name)
 ) {
 
     // set student property values
+    $student->id = $data->id;
     $student->name = $data->name;
     $student->topic = $data->topic ?: NULL;
     $student->accepted = $data->accepted ?: 0;
-    $student->advisor_id = $data->advisor_id ?: 0;
+    $student->advisor_id = $data->advisor_id;
 
     // create the student
     if ($student->create()) {

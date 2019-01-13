@@ -22,13 +22,13 @@ $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if (
-    !empty($data->name) &&
-    !empty($data->area)
+    !empty($data->name)
 ) {
 
     // set advisor property values
     $advisor->name = $data->name;
     $advisor->area = $data->area;
+    $advisor->title_id = $data->title_id;
 
     // create the advisor
     if ($advisor->create()) {

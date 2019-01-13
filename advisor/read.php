@@ -36,6 +36,7 @@ if ($num > 0) {
             "id" => $id,
             "name" => $name,
             "area" => html_entity_decode($area),
+            "title" => $title
         );
 
         array_push($advisors_arr["records"], $advisor_item);

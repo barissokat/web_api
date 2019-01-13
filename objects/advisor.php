@@ -10,6 +10,8 @@ class Advisor
     public $id;
     public $name;
     public $area;
+    public $title_id;
+    public $title;
 
     // constructor with $db as database connection
     public function __construct($db)
@@ -23,11 +25,14 @@ class Advisor
 
         // select all query
         $query = "SELECT
-               id, name, area
-           FROM
-               " . $this->table_name . "
-           ORDER BY
-               name";
+                    a.id, a.name, a.area, t.name as title
+                FROM
+                    " . $this->table_name . " a
+                LEFT JOIN
+                    titles t
+                ON a.title_id = t.id
+                ORDER BY
+                    a.name";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -46,7 +51,7 @@ class Advisor
         $query = "INSERT INTO
                " . $this->table_name . "
            SET
-               name=:name, area=:area";
+               name=:name, area=:area, title_id=:title_id";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -54,10 +59,12 @@ class Advisor
         // sanitize
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->area = htmlspecialchars(strip_tags($this->area));
+        $this->title_id = htmlspecialchars(strip_tags($this->title_id));
 
         // bind values
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":area", $this->area);
+        $stmt->bindParam(":title_id", $this->title_id);
 
         // execute query
         if ($stmt->execute()) {
@@ -74,13 +81,16 @@ class Advisor
 
         // query to read single record
         $query = "SELECT
-               id, name, area
-           FROM
-               " . $this->table_name . "
-           WHERE
-               id = ?
-           LIMIT
-               0,1";
+                    a.id, a.name, a.area, t.name as title
+                FROM
+                    " . $this->table_name . " a
+                LEFT JOIN
+                    titles t
+                ON a.title_id = t.id
+                WHERE
+                    a.id = ?
+                LIMIT
+                    0,1";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -97,6 +107,7 @@ class Advisor
         // set values to object properties
         $this->name = $row['name'];
         $this->area = $row['area'];
+        $this->title = $row['title'];
     }
 
     // update the advisor
@@ -108,7 +119,8 @@ class Advisor
                " . $this->table_name . "
            SET
                name = :name,
-               area = :area
+               area = :area,
+               title_id = :title_id
            WHERE
                id = :id";
 
@@ -118,11 +130,13 @@ class Advisor
         // sanitize
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->area = htmlspecialchars(strip_tags($this->area));
+        $this->title_id = htmlspecialchars(strip_tags($this->title_id));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         // bind new values
         $stmt->bindParam(':name', $this->name);
         $stmt->bindParam(':area', $this->area);
+        $stmt->bindParam(':title_id', $this->title_id);
         $stmt->bindParam(':id', $this->id);
 
         // execute the query
@@ -164,13 +178,16 @@ class Advisor
 
         // select all query
         $query = "SELECT
-               id, name, area
-           FROM
-               " . $this->table_name . "
-           WHERE
-               name LIKE ? OR area LIKE ?
-           ORDER BY
-               name";
+                   a.id, a.name, a.area, t.name as title
+                FROM
+                    " . $this->table_name . " a
+                LEFT JOIN
+                    titles t
+                ON a.title_id = t.id
+                WHERE
+                    a.name LIKE ? OR a.area LIKE ?
+                ORDER BY
+                    a.name";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -195,12 +212,15 @@ class Advisor
 
         // select query
         $query = "SELECT
-               id, name, area
-           FROM
-               " . $this->table_name . "
-           ORDER BY
-               name
-           LIMIT ?, ?";
+                   a.id, a.name, a.area, t.name as title
+                FROM
+                    " . $this->table_name . " a
+                LEFT JOIN
+                    titles t
+                ON a.title_id = t.id
+                ORDER BY
+                    a.name
+                LIMIT ?, ?";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);

@@ -28,7 +28,8 @@ if($advisor->name!=null){
     $advisor_arr = array(
         "id" =>  $advisor->id,
         "name" => $advisor->name,
-        "area" => $advisor->area
+        "area" => $advisor->area,
+        "title" => $advisor->title
  
     );
  

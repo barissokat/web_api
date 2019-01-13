@@ -41,7 +41,8 @@ if($num>0){
         $advisor_item=array(
             "id" => $id,
             "name" => $name,
-            "area" => html_entity_decode($area)
+            "area" => html_entity_decode($area),
+            "title" => $title
         );
  
         array_push($advisors_arr["records"], $advisor_item);

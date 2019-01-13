@@ -51,18 +51,20 @@ class Student
         $query = "INSERT INTO
                " . $this->table_name . "
            SET
-               name=:name, topic=:topic, accepted=:accepted, advisor_id=:advisor_id";
+               id=:id, name=:name, topic=:topic, accepted=:accepted, advisor_id=:advisor_id";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
 
         // sanitize
+        $this->id = htmlspecialchars(strip_tags($this->id));
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->topic = htmlspecialchars(strip_tags($this->topic));
         $this->accepted = htmlspecialchars(strip_tags($this->accepted));
         $this->advisor_id = htmlspecialchars(strip_tags($this->advisor_id));
 
         // bind values
+        $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":topic", $this->topic);
         $stmt->bindParam(":accepted", $this->accepted);

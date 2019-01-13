@@ -26,6 +26,7 @@ $advisor->id = $data->id;
 // set advisor property values
 $advisor->name = $data->name;
 $advisor->area = $data->area;
+$advisor->title_id = $data->title_id;
  
 // update the advisor
 if($advisor->update()){
