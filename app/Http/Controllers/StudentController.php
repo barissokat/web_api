@@ -24,16 +24,20 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Student $student)
     {
-        $student = Student::create([
+        $student = Student::create($request->all());
+
+        return response()->json($student, 201);
+
+        /*$student = Student::create([
             'advisor_id' => $request->advisor()->id ?: 1,
             'name' => $request->name,
             'topic' => $request->topic,
             'confirmed' => 0
           ]);
-      
-          return new StudentResource($student);
+        
+          return new StudentResource($student);*/
     }
 
     /**
@@ -44,7 +48,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        return new StudentResource($student);
+        return new StudentResource(Student::find($id));
     }
 
     /**
@@ -54,11 +58,15 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
-        $student->update($request->only(['name', 'topic', 'confirmed', 'advisor_id']));
+        $student->update($request->all());
 
-        return new StudentResource($student);
+        return response()->json($student, 200);
+        
+        /*$student = $student->update($request->only(['name', 'topic', 'confirmed', 'advisor_id']));
+
+        #return new StudentResource($student);*/
     }
 
     /**
@@ -67,7 +75,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
         $student->delete();
 

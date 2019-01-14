@@ -19,6 +19,7 @@ class StudentResource extends JsonResource
             'name' => $this->name,
             'topic' => $this->topic,
             'confirmed' => $this->confirmed,
+            'advisor_id' => $this->advisor_id,
             'advisor' => $this->advisor->name
         ];
     }
