@@ -38,10 +38,16 @@ $(document).ready(function () {
          create_student_html += "<td><input type='text' name='name' class='form-control' required /></td>";
          create_student_html += "</tr>";
 
+         // email field
+         create_student_html += "<tr>";
+         create_student_html += "<td>Email</td>";
+         create_student_html += "<td><input type='email' name='email' class='form-control' required /></td>";
+         create_student_html += "</tr>";
+
          // topic field
          create_student_html += "<tr>";
          create_student_html += "<td>Topic</td>";
-         create_student_html += "<td><input type='text' name='topic' class='form-control' placeholder='Not decided' /></td>";
+         create_student_html += "<td><input type='text' name='topic' class='form-control' required /></td>";
          create_student_html += "</tr>";
 
          // advisors 'select' field

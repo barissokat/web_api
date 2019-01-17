@@ -24,7 +24,7 @@ class Student
     {
         // select all query
         $query = "SELECT
-                     s.id, s.name, s.topic, s.status, a.name as advisor_name
+                     s.id, s.name, s.email, s.topic, s.status, a.name as advisor_name
                 FROM
                     " . $this->table_name . " s
                 LEFT JOIN
@@ -47,18 +47,20 @@ class Student
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                id=:id, name=:name, topic=:topic, status=0, advisor_id=:advisor_id";
+                id=:id, name=:name, email=:email, topic=:topic, status=0, advisor_id=:advisor_id";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
         // sanitize
         $this->id = htmlspecialchars(strip_tags($this->id));
         $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->email = htmlspecialchars(strip_tags($this->email));
         $this->topic = htmlspecialchars(strip_tags($this->topic));
         $this->advisor_id = htmlspecialchars(strip_tags($this->advisor_id));
         // bind values
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":topic", $this->topic);
         $stmt->bindParam(":advisor_id", $this->advisor_id);
         // execute query
@@ -73,7 +75,7 @@ class Student
     {
         // query to read single record
         $query = "SELECT
-               s.id, s.name, s.topic, s.status, s.advisor_id, a.name as advisor_name
+               s.id, s.name, s.email, s.topic, s.status, s.advisor_id, a.name as advisor_name
             FROM
                " . $this->table_name . " s
             LEFT JOIN
@@ -95,6 +97,7 @@ class Student
         // set values to object properties
         $this->id = $row['id'];
         $this->name = $row['name'];
+        $this->email = $row['email'];
         $this->topic = $row['topic'];
         $this->status = $row['status'];
         $this->advisor_id = $row['advisor_id'];

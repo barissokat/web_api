@@ -23,12 +23,15 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if (
     !empty($data->id) &&
-    !empty($data->name)
+    !empty($data->name) &&
+    !empty($data->email) &&
+    !empty($data->topic)
 ) {
 
     // set student property values
     $student->id = $data->id;
     $student->name = $data->name;
+    $student->email = $data->email;
     $student->topic = isset($data->topic) ? $data->topic : NULL;
     $student->advisor_id = $data->advisor_id == -1 ? 1 : $data->advisor_id;
 
