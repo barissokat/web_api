@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
    // show list of student on first load
    showStudents();
 
@@ -35,8 +34,8 @@ function showStudents() {
 
          // creating new table row per record
          read_students_html += "<tr>";
-         
-         var topic = val.topic == "" ?  "Not Determined" : val.topic ;
+
+         var topic = val.topic == "" ? "Not Determined" : val.topic;
          var status = val.status == 1 ? "Accepted" : "No Status";
 
          read_students_html += "<td>" + val.id + "</td>";
@@ -54,7 +53,7 @@ function showStudents() {
          read_students_html += "</button>";
 
          // delete button
-         read_students_html += "<button class='btn btn-danger delete-student-button' data-id='" + val.id + "'>";
+         read_students_html += "<button class='btn btn-danger delete-student-button' data-id='" + val.id + "' data-email='" + val.email + "'>";
          read_students_html += "<span class='glyphicon glyphicon-remove'></span> Delete";
          read_students_html += "</button>";
          read_students_html += "</td>";

@@ -45,6 +45,12 @@ $(document).ready(function () {
          read_one_student_html += "<td>" + status + "</td>";
          read_one_student_html += "</tr>";
 
+         // student email
+         read_one_student_html += "<tr>";
+         read_one_student_html += "<td>email</td>";
+         read_one_student_html += "<td>" + data.email + "</td>";
+         read_one_student_html += "</tr>";
+
          // student advisor name
          read_one_student_html += "<tr>";
          read_one_student_html += "<td>Advisor</td>";

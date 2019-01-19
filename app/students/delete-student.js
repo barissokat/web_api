@@ -4,6 +4,7 @@ $(document).ready(function () {
    $(document).on('click', '.delete-student-button', function () {
       // get the student id
       var student_no = $(this).attr('data-id');
+      var student_email = $(this).attr('data-email');
 
       // bootbox for good looking 'confirm pop up'
       bootbox.confirm({
@@ -28,7 +29,8 @@ $(document).ready(function () {
                   type: "POST",
                   dataType: 'json',
                   data: JSON.stringify({
-                     id: student_no
+                     id: student_no,
+                     email: student_email
                   }),
                   success: function (result) {
 

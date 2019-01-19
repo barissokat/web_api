@@ -30,6 +30,7 @@ if ($student->name != null) {
         "name" => $student->name,
         "topic" => html_entity_decode($student->topic),
         "status" => $student->status,
+        "email" => $student->email,
         "advisor_id" => $student->advisor_id,
         "advisor_name" => $student->advisor_name,
     );

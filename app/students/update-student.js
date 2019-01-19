@@ -14,6 +14,7 @@ $(document).ready(function () {
          var status = data.status;
          var advisor_id = data.advisor_id;
          var advisor_name = data.advisor_name;
+         var email = data.email;
 
          // load list of advisors
          $.getJSON("http://localhost/api/advisor/read.php", function (data) {
@@ -47,6 +48,12 @@ $(document).ready(function () {
             update_student_html += "<tr>";
             update_student_html += "<td>Topic</td>";
             update_student_html += "<td>" + topic + "<input value=\"" + topic + "\" name='topic' type='hidden' /></td>";
+            update_student_html += "</tr>";
+
+            // email field
+            update_student_html += "<tr>";
+            update_student_html += "<td>Email</td>";
+            update_student_html += "<td>" + email + "<input value=\"" + email + "\" name='email' type='hidden' /></td>";
             update_student_html += "</tr>";
 
             // advisors 'select' field

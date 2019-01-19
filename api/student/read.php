@@ -37,6 +37,7 @@ if ($num > 0) {
             "name" => $name,
             "topic" => html_entity_decode($topic),
             "status" => $status,
+            "email" => $email,
             "advisor_name" => $advisor_name
         );
 
